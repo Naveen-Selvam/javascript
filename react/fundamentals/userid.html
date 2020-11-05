@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> User ID </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+    <script type="text/babel">
+        const roothandel = document.getElementById('root')
+
+        function UserInfo(props) {
+            let result = []
+            for (const key in props.user) {
+                if( typeof(props.user[key]) === 'number'  ){
+                    result.push([key, '-', props.user[key]])
+                }
+               else if( props.user[key].length > 0){
+                result.push([key, '-', props.user[key]])
+                }
+                else{
+                    result.push([key, '-','N/A'])
+                }
+            }
+            return (result.map((ele) => {
+                return <p key={ele}>{ele}</p>
+            })
+
+            )
+
+        }
+
+        function App(props) {
+
+            const user1 = { id: 1, name: 'user1', email: 'user1@gmail.com', city: 'bangalore' }
+            const user2 = { id: 1, name: 'user1', email: '', city: '' }
+
+
+            return (
+                <div>
+                    <UserInfo user={user1} />
+                    <hr />
+                    <UserInfo user={user2} />
+                    <hr />
+                </div>
+            )
+        }
+
+        ReactDOM.render(<App />, roothandel)
+
+    </script>
+</body>
+
+</html>

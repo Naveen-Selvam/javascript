@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>  </title>
+    </head>
+    <body>
+     <div id="root">
+
+     </div>
+
+     <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+     <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+ 
+    
+        <script type="text/babel">
+            const roothandel=document.getElementById('root')
+            const {useState} = React
+          
+            function MilesConvertor(props){
+              
+                const [range, setRange] = useState(0)
+             
+                
+               const handelRange =(e)=>{
+                 const result= e.target.value
+                 setRange(result)
+               }
+
+                return (
+                    <div>
+                    <h2>Kms - {1.60934*range} </h2>
+                    <h2>Miles - {range}</h2>
+                    <input type="range" min="0" max="100" value={range} onChange={handelRange}/>
+                    </div>
+                )
+            }
+
+            function App(props){
+                return (
+                    <div>
+                    <h1>Distance Calculator</h1>
+                    <hr/>
+                    <MilesConvertor/>
+                    </div>
+                    )
+            }
+
+            ReactDOM.render(<App />,roothandel)
+
+        </script>
+    </body>
+</html>

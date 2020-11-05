@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+    <script type="text/babel">
+        const roothandel = document.getElementById('root')
+
+        const colors = [
+            { color: 'red', symbols: ['energy', 'strength', 'power', 'courage'] },
+            { color: 'blue', symbols: ['loyalty', 'trust', 'stability', 'confidence'] },
+            { color: 'orange', symbols: ['excitment', 'fun', 'haste', 'action'] },
+            { color: 'yellow', symbols: ['cheerfulness', 'happiness', 'joy', 'optimism'] }
+        ]
+
+
+const generating = (color)=>{
+const result=[]
+color.forEach((ele)=>{
+    result.push(<li key={ele.color}>{ele.color}</li>)
+})
+return result
+}
+
+        const generate = (symbol) => {
+            let result = []
+            const final = []
+
+            symbol.forEach((ele) => {
+
+                result = [].concat(ele.symbols)
+
+                result.forEach((symb) => {
+                    final.push(<li key={symb} > <font color={ele.color}> {symb} </font> </li>)
+                })
+
+            })
+
+            return final
+        }
+
+        const ele = (
+            <div>
+            <h1>All Colors</h1>
+            <ol>{generating(colors)}</ol>
+
+            <h1>All Symbols</h1>
+            <ol> {generate(colors)} </ol>
+            </div>
+        )
+
+        ReactDOM.render(ele, roothandel)
+
+
+    </script>
+</body>
+
+</html>

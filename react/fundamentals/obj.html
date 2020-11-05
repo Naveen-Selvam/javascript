@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>  </title>
+    </head>
+    <body>
+     <div id="root">
+
+     </div>
+
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src='js/babel.js'></script>
+    
+        <script type="text/babel">
+            const roothandel=document.getElementById('root')
+            
+            const users= {
+                 id :1,
+                name: 'facebook', 
+                url:'http://www.facebook.com'
+                }
+
+                const generate=(obj) => {
+                    const result = []
+                    for(const k in obj){
+                        result.push( <li key={k}> {k} - {obj[k]} </li>)
+                    }
+                    return result
+                }
+
+                const ele = (
+                    <ul>
+                    {generate(users)}
+                    </ul>
+                )
+
+                ReactDOM.render(ele,roothandel)
+               
+            
+
+        </script>
+    </body>
+</html>

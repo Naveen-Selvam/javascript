@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>  </title>
+    </head>
+    <body>
+     <div id="root">
+
+     </div>
+
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src='js/babel.js'></script>
+    
+        <script type="text/babel">
+            const roothandel=document.getElementById('root')
+
+
+function User(prop){
+
+function greet(){
+    alert('hi da ' + prop.name)
+}
+
+return <button onClick={greet} >click me</button>
+
+}
+
+const ele=<User name=' steve' />
+
+      ReactDOM.render(ele,roothandel)
+
+        </script>
+    </body>
+</html>

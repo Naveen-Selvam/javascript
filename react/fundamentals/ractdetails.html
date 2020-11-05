@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+    <script type="text/babel">
+        const roothandel = document.getElementById('root')
+
+        const details = "React (also known as React.js or ReactJS) is an open-source, front end, JavaScript library for building user interfaces or UI components. It is maintained by Facebook and a community of individual developers and companies.React can be used as a base in the development of single-page or mobile applications. However, React is only concerned with rendering data to the DOM, and so creating React applications usually requires the use of additional libraries for state management and routing. Redux and React Router are respective examples of such libraries."
+
+        const details1 = "React is Awesome"
+
+        function ArticlesIntro(props) {
+
+            function displayDetails() {
+                alert(props.details)
+            }
+
+            if (props.details.length > 100) {
+
+                return (
+                    <div>
+                        <p>{props.details.slice(0, 100)}...</p>
+                        <button onClick={displayDetails} >show more</button><hr />
+                    </div>
+                )
+            }
+            else {
+
+                return (
+                    <div>
+                        <p>{props.details.slice(0)}</p>
+                        <hr />
+                    </div>
+                )
+            }
+
+
+        }
+
+
+
+
+        function App(props) {
+
+            return (
+                <div>
+
+                    <ArticlesIntro details={details1} />
+                    <ArticlesIntro details={details} />
+                </div>
+            )
+        }
+
+        ReactDOM.render(<App />, roothandel)
+
+    </script>
+</body>
+
+</html>

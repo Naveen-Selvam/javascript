@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>  </title>
+    </head>
+    <body>
+     <div id="root">
+
+     </div>
+
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src='js/babel.js'></script>
+    
+        <script type="text/babel">
+            const roothandel=document.getElementById('root')
+
+            const users= [
+                {id :1 , name:'user1'},
+                {id :2 , name:'user2'},
+                {id :3 , name:'user3'}
+            ]
+
+            const ele = (
+                <div>
+                <h2> Lising user count - {users.length} </h2>
+                <ul>
+                  {users.map((eles,i)=>{
+                      return <li key={i}> {eles.name}</li>
+                  })}
+                </ul>
+                </div>
+            )
+
+            ReactDOM.render(ele,roothandel)
+
+        </script>
+    </body>
+</html>

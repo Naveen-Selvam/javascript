@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> My First Dynamic WebSite </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src='../js/babel.js'></script>
+
+    <script type="text/babel">
+
+        const roothandel = document.getElementById('root')
+        const {useState} = React
+        
+        function Pricedetails(props){
+            
+            const {totalamount,totalitem} = props
+            const deliverycharge = 50      
+            return (
+                <div>
+                <h3>Price ({totalitem}) Items - {totalamount}</h3>
+                <h3>Delivery Charge - {deliverycharge}</h3>
+                <b> Total Amount = {totalamount + deliverycharge} </b>
+                </div>
+                            )
+        }
+     
+     function Cartitem(props){
+         const {id,name,price,qty} = props
+         const {removeitem , increment ,decrement} = props
+         return (
+             <div>
+             <b>{name} </b>
+             <p>price - {price}</p>
+             <button disabled={qty==1} onClick={()=>{decrement(id)}}> - </button> {qty} <button onClick={()=>{increment(id)}}> + </button>
+             <button onClick={()=>{removeitem(id)}}> Remove </button>
+             <hr/>
+             </div>
+         )
+     }
+
+        function Mycart(props) {
+            const [products,setProducts] = useState( [{ id: 1, name: 'pen', price: 10, qty: 1 },
+                              { id: 2, name: 'pencil', price: 20, qty: 1 }
+                             ])
+              
+              const cartsum = ()=>{
+                let sum=0
+                 products.forEach((prod)=>{          
+                     sum += prod.price * prod.qty
+                 })
+                 return sum
+              } 
+
+              const removeitem = (id)=>{
+                  const newproducts = products.filter((ele)=>{
+                      return ele.id != id
+                  })
+                  setProducts(newproducts)
+              }
+
+              const increment = (id) =>{
+               const newproducts =   products.map((ele)=>{
+                             if(ele.id == id){
+                           return {...ele, ...{qty :ele.qty+1}}
+                      }
+                      else{
+                          return {...ele}
+                      }   
+                  })
+                  setProducts(newproducts)
+               }
+
+               const decrement = (id)=>{
+                const newproducts =   products.map((ele)=>{
+                             if(ele.id == id){
+                           return {...ele, ...{qty :ele.qty-1}}
+                      }
+                      else{
+                          return {...ele}
+                      }   
+                  })
+                  setProducts(newproducts)
+               }
+            
+            return (
+                <div>
+                    <h3>My Cart - {products.length}</h3>
+                    {
+                        products.map((product)=>{
+                            return <Cartitem key={product.id} {...product} increment={increment} decrement={decrement} removeitem={removeitem}/> 
+                        })
+                    }
+                    <Pricedetails totalitem={products.length} totalamount = { cartsum () } />
+                </div>
+            )
+
+        }
+
+        function App(props) {
+            return (
+                <div>
+                   <h1>Cart Page</h1>
+                    <Mycart />
+                </div>
+            )
+        }
+
+        ReactDOM.render(<App />, roothandel)
+
+    </script>
+</body>
+
+</html>

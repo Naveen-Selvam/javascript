@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src='../js/babel.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/validator/13.1.17/validator.min.js'></script>
+
+    <script type="text/babel">
+        const roothandel = document.getElementById('root')
+        const profesion = ['Student', 'Employee', 'Business']
+        const { useState } = React
+        function FormEnqiry(props) {
+
+            const [username, setUsername] = useState('')
+            const [usermail, setUsermail] = useState('')
+            const [usermsg, setUsermsg] = useState('')
+            const [proff, setProff] = useState('')
+            const [gender, setGender] = useState('')
+            const [checkbox, setCheckbox] = useState(false)
+            const [showmsg, setMsg] = useState(false)
+            const [errordisp, setErrordips] = useState({})
+            const error = {}
+            const handelusernamechange = (e) => {
+                const nameinput = e.target.value
+                setUsername(nameinput)
+            }
+            const handelmailchange = (e) => {
+                const mailinput = e.target.value
+                setUsermail(mailinput)
+            }
+            const handelmsgchange = (e) => {
+                const msginput = e.target.value
+                setUsermsg(msginput)
+            }
+            const handelselect = (e) => {
+                const profinput = e.target.value
+                setProff(profinput)
+            }
+            const handelradio = (e) => {
+                const genderinput = e.target.value
+                setGender(genderinput)
+            }
+            const handelcheckbox = () => {
+                setCheckbox(!checkbox)
+            }
+            const handeloncfoucs = () => {
+                setMsg(true)
+            }
+            const handelblur = () => {
+                setMsg(false)
+            }
+            const runvalidation =()=>{
+                //name
+                if(username.trim().length === 0){
+                    error.name = 'Name is blank'
+                }
+                //email
+                if(usermail.trim().length === 0){
+                    error.email = 'Email is blank'
+                }
+                else if(!validator.isEmail(usermail)){
+                    error.email = 'invalid email format'
+                }
+            }
+            const handelSubmit = (e) => {
+                e.preventDefault()
+
+               runvalidation()
+
+               if(Object.keys(error).length === 0){
+                   setErrordips({})
+               
+                 
+                const form = {
+                    name : username,
+                    mail : usermail,
+                    msg  : usermsg,
+                    proff: proff, 
+                    gender: gender ,
+                   accepet:checkbox
+                }
+                console.log(form);
+                setUsermsg('')
+                setProff('')
+                setUsermail('')
+                setUsername('')
+                setCheckbox(false)
+                   
+               }
+               else{
+                   setErrordips(error)
+                   console.log(error);
+                   
+               }
+
+               
+            }
+
+
+            return (
+                <div>
+                    <h1>Form Enquiry</h1>
+                    <form onSubmit={handelSubmit}>
+                        <label>Name</label> <br />
+                        <input type='text' value={username} onChange={handelusernamechange} />
+                        {
+                            (errordisp.name) && <span>{errordisp.name}</span>
+                        }
+                        <br />
+                        <label>Maild id</label> <br />
+                        <input type='text' value={usermail} onChange={handelmailchange} />
+                        {
+                            (errordisp.email) && <span>{errordisp.email}</span>
+                        }<br />
+                        <label>Message</label><br />
+                        <textarea value={usermsg} onFocus={handeloncfoucs} onBlur={handelblur} onChange={handelmsgchange}></textarea>
+                        {
+                            (showmsg) && <span>Enter yout educational details</span>
+                        }
+                        <br />
+                        <label>profession</label><br />
+
+                        <select value={proff} onChange={handelselect}>
+                            <option value=''>Select</option>
+                            {
+                                profesion.map((ele, i) => {
+                                    return <option value={ele} key={i}>{ele}</option>
+                                })
+                            }
+                        </select><br />
+                        <label>Gender</label><br />
+                        <input type='radio' name='gender' value='Male' checked={gender === 'Male'} onChange={handelradio} />Male
+                    <input type='radio' name='gender' value='Female' checked={gender === 'Female'} onChange={handelradio} />Female <br />
+
+                        <input type='checkbox' checked={checkbox} onChange={handelcheckbox} />I Agree to Terms & Condition<br />
+                        <input type='submit' disabled={!checkbox} />
+                    </form>
+                </div>
+            )
+        }
+
+        ReactDOM.render(<FormEnqiry />, roothandel)
+
+    </script>
+</body>
+
+</html>

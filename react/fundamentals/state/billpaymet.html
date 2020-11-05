@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>  </title>
+    </head>
+    <body>
+     <div id="root">
+
+     </div>
+     <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+     <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+ 
+    
+        <script type="text/babel">
+            const roothandel=document.getElementById('root')
+            const {useState} = React
+            function BillPayment(props){
+                const [network , setNetwork] = useState('Vodaphone')
+                 
+                 const handelnetworkchange =(e)=>{
+                     setNetwork(e.target.value)
+                 }
+
+              return (
+                  <div>
+                  <h1>{network} - Bill payment</h1>
+                  <hr/>
+                  <input type='radio' name='company' value='Vodaphone' checked={'Vodaphone' == network }  onChange={handelnetworkchange} />Vodaphone<br/>
+                  <input type='radio' name='company' value='Airtel' checked={'Airtel' == network } onChange={handelnetworkchange} />Airtel<br/>
+                  <input type='radio' name='company' value='Jio' checked={'Jio' == network } onChange={handelnetworkchange} />Jio<br/>
+                  <input type='text' placeholder={`Enter your ${network} phone number` } />
+                  </div>
+              )
+            }
+
+            function App(props){
+                return  <BillPayment/>
+            }
+
+            ReactDOM.render(<App/>,roothandel)
+
+        </script>
+    </body>
+</html>

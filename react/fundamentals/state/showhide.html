@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src='../js/babel.js'></script>
+
+    <script type="text/babel">
+        const roothandel = document.getElementById('root')
+        const content ='React make somthing painless to creat ui interfaces design varies for each state application and react will efficiently upadate it and rerender'
+        const btndisplay = 'Hide'
+        const { useState } = React
+        function Show(props) {
+
+            const [status, setStatus] = useState(false)
+            const [cont , setCont] = useState(content)
+            const [data , setData] = useState(btndisplay)
+            const funcbutton = () => {
+            if(!status){
+                setData('Show')
+            setStatus(true)
+            setCont(' ')
+            }
+            else{
+                setCont(content)
+                setStatus(false)
+                setData('Hide')
+            }
+            }
+            return (
+                <div>
+                    <h1>Show / hide</h1>
+                    <p>{cont}</p>
+                    <button onClick={funcbutton}>{data}</button>
+                </div>
+            )
+        }
+
+        ReactDOM.render(<Show />, roothandel)
+
+    </script>
+</body>
+
+</html>

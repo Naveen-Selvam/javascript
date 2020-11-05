@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src='../js/babel.js'></script>
+
+    <script type="text/babel">
+        const roothandel = document.getElementById('root')
+        const { useState } = React
+        function RandomNumber(props) {
+            const [number, setNumber] = useState([])
+
+            const addItems = () => {
+                //   const newNumber = number.slice(0)
+                //   const random = Math.round(Math.random() * 100)
+                //   newNumber.push(random)
+                // setNumber(newNumber)
+
+
+                const random = Math.round(Math.random() * 100)
+                const newNumber = number.concat(random)
+
+                console.log(number);
+                console.log(random);
+                console.log(newNumber);
+
+
+                setNumber(newNumber)
+
+
+                // const random = Math.round(Math.random() * 100)
+                // const newNumber = [...number, random]
+                // setNumber (newNumber)
+
+            }
+            return (
+                <div>
+                    <h1>Total count - {number.length}</h1>
+                    <button onClick={addItems}>Add</button>
+                    <ul>
+                    {
+                        number.map((ele,i)=>{
+                            return <li key={i}>{ele}</li>
+                        })
+                    }
+                    </ul>
+                   
+                </div>
+            )
+        }
+
+
+        ReactDOM.render(<RandomNumber />, roothandel)
+    </script>
+</body>
+
+</html>

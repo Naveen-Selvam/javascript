@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+    <script type="text/babel">
+        const roothandel = document.getElementById('root')
+
+        function NumberShow(props) {
+            console.log(props);
+
+            return (
+                props.number % 2 === 0 ? <h1>{props.number} is Even </h1> : <h1>{props.number} is Odd</h1>)
+
+
+        }
+
+        function App(props) {
+
+            return (
+                <div>
+                    <NumberShow number={10} />
+                    <NumberShow number={31} />
+                </div>
+            )
+        }
+
+        ReactDOM.render(<App />, roothandel)
+
+    </script>
+</body>
+
+</html>

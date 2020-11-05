@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>  </title>
+    </head>
+    <body>
+     <div id="root">
+
+     </div>
+
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src='js/babel.js'></script>
+    
+        <script type="text/babel">
+            const roothandel=document.getElementById('root')
+
+            const users = [
+        { "id": 1, "email": "george@gmail.com", "first_name": "George", "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/calebogden/128.jpg" },
+        { "id": 2, "email": "weaver@gmail.com", "first_name": "Weaver", "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg" }, 
+        { "id": 3, "email": "wong@gmail.com", "first_name": "Wong", "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/olegpogodaev/128.jpg" }, 
+        { "id": 4, "email": "eve@gmail.com", "first_name": "Eve", "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/marcoramires/128.jpg" } 
+ ]
+
+function DispUser(props){
+
+    function more(a){
+        alert(a.email);
+        
+    }
+return (<ul>
+{
+    props.users.map((ele)=>{
+        return (<li key={ele.id}>{ele.first_name} 
+                <button onClick={()=>{more(ele)}}>more</button> </li>
+        )
+    })
+}
+</ul>)
+
+}
+
+
+ const ele=<DispUser users={users} />
+
+
+ ReactDOM.render(ele,roothandel)
+
+        </script>
+    </body>
+</html>

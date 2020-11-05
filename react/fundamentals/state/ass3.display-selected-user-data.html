@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script src="../js/react.development.js"></script>
+        <script src="../js/react-dom.development.js"></script>
+        <script src="../js/babel.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+        <script type="text/babel">
+        const rootHandle = document.getElementById('root')
+        const url = 'https://jsonplaceholder.typicode.com/users'
+        
+        const { useState, useEffect } = React 
+
+        function UsersSelect (props) {
+          const [users, setUsers]  = useState([])
+          const [singleUser, setSingleUser] = useState('')
+
+            useEffect(() => {
+                axios.get(url)
+                    .then((response) => {
+                        setUsers(response.data)
+                    })
+            },[])
+
+            const handleChange = (e) => {
+                const dropDown = e.target.value
+                const result = users.find((user) => {
+                    return user.id == dropDown
+                })
+                setSingleUser(result)
+            }
+
+            return(
+                <div>
+                    <label> Users </label>
+                    <select onChange={handleChange}>
+                        <option>select user </option> 
+                        {users.map((user) => {
+                            return <option key={user.id} value={user.id}> {user.name} </option>
+                        })}
+                    </select>
+                    {singleUser ? <h3>{
+                        // users.map((user) => {
+                        //      if(user.id === Number(userName)) {
+                        //          return(`${user.name} - ${user.email} - ${user.address.city}`)
+                        //      }
+                            
+                        // })
+                        `${singleUser.name} - ${singleUser.email} - ${singleUser.address.city}`
+                    }</h3> : <h3>Select any user</h3>} 
+                    
+                </div>
+            )
+        }
+
+        ReactDOM.render(<UsersSelect  />, rootHandle)
+        </script>
+    </body>
+</html>

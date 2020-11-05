@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src='js/babel.js'></script>
+
+    <script type="text/babel">
+        const roothandel = document.getElementById('root')
+
+        function Cart(props) {
+            const { item } = props
+            return (
+                <div>
+                    {
+                        (item.length > 0) ? (<p>cart length is {item.length}</p>) : (<p>cart is empty </p>)
+                    }
+                </div>
+            )
+
+        }
+
+        function App(props) {
+            const item = []
+
+            return (
+                <Cart item={item} />
+            )
+        }
+
+        ReactDOM.render(<App />, roothandel)
+
+    </script>
+</body>
+
+</html>

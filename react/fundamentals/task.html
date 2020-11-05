@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> select task </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+    <script type="text/babel">
+
+        const roothandel = document.getElementById('root')
+
+        const tasks = [
+          { id: 1, title: 'Task 1', isCompleted: true },
+          { id: 2, title: 'Task 2', isCompleted: true },
+          { id: 3, title: 'Task 3', isCompleted: false }
+  ]
+
+function DisplayIndex(props){
+
+function alertMsg(task,idx){
+   alert(`you clicked on the task present at ${idx} index`)
+}
+
+return (
+    <ul>
+    {props.tasks.map((ele,i)=>{
+        return <li key={ele.id} onClick={()=>{alertMsg(ele,i)}}>{ele.title}</li>
+    })}
+    </ul>
+)
+}
+
+const ele=<DisplayIndex tasks={tasks}/>
+
+        ReactDOM.render(ele, roothandel)
+
+    </script>
+</body>
+
+</html>

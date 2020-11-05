@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> UserProfile </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+    <script type="text/babel">
+        const roothandel = document.getElementById('root')
+
+        function UserAvatar(props) {
+           return (
+               <div>
+                <img  src={props.src}/>
+                <h1>{props.name}</h1>
+                </div>
+           )
+        }
+
+        function DefaultAvatar(props) {
+            return (
+                <div>
+                    <img src='https://i.ibb.co/fDGgcyJ/default-user-pic.png'/>
+                    <h1>{props.name}</h1>
+                    </div>
+            )
+        }
+
+        function UserProfile(props) {
+             
+             for(const key in props.user){
+            return (     
+            (props.user.avatar.length === 0) ? (<DefaultAvatar name={props.user.name} />):(<UserAvatar name={props.user.name} src={props.user.avatar}/>)
+            )       
+             }
+        }
+
+        function App(props) {
+
+            const user1 = { id: 1, name: 'Dona', avatar: 'https://i.ibb.co/FKvv2Mr/donna.png' }
+            const user2 = { id: 1, name: 'Rachel', avatar: '' }
+
+            return (
+                <div>
+                    <UserProfile user={user1} />
+                    <UserProfile user={user2}/>
+                    <hr/>
+
+                </div>
+            )
+        }
+
+        ReactDOM.render(<App />, roothandel)
+
+    </script>
+</body>
+
+</html>

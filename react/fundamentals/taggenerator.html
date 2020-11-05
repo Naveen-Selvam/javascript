@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Random number </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+    <script type="text/babel">
+
+        const roothandel = document.getElementById('root')
+
+        function TagGenerator(props) {
+
+            function hashTag() {
+                let result = []
+                let val = prompt('Enter the string')
+                val = val.split(' ')
+                for (let i = 0; i < val.length; i++) {
+                    result.push(val[i][0].toUpperCase() + val[i].slice(1))
+
+                }
+
+                alert(`#${result.join('')}`)
+            }
+
+            return <button onClick={hashTag}> Enter the string </button>
+
+        }
+
+        const ele = <TagGenerator />
+
+        ReactDOM.render(ele, roothandel)
+
+    </script>
+</body>
+
+</html>

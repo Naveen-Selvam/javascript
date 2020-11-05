@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+    <script type="text/babel">
+        const roothandel = document.getElementById('root')
+        function UserStatus(props) {
+
+            for (const key in props.user) {
+                if (props.user.isLoggedIn) {
+                    return <p>{props.user.name}is currently <b>Logged</b> in the system</p>
+                }
+                else {
+                    return <p>{props.user.name}is currently <b>not Logged</b> in the system</p>
+                }
+            }
+        }
+
+        function App(props) {
+            const user1 = { id: 1, name: 'adam', isLoggedIn: false }
+            const user2 = { id: 2, name: 'steve', isLoggedIn: true }
+            return (
+                <div>
+                    <h1>User Login Status</h1>
+                    <UserStatus user={user1} />
+                    <UserStatus user={user2} />
+                </div>
+            )
+        }
+
+        ReactDOM.render(<App />, roothandel)
+
+    </script>
+</body>
+
+</html>

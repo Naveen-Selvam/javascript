@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>  </title>
+    </head>
+    <body>
+     <div id="root">
+
+     </div>
+
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src='js/babel.js'></script>
+    
+        <script type="text/babel">
+            const roothandel=document.getElementById('root')
+
+            function Greet(pro){
+                return <h1> thambi {pro.name} teel ur {pro.em} </h1>
+            }
+
+            const ele=<Greet name='naveen' em='mail id'/>
+
+            ReactDOM.render(ele,roothandel)
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+
+    <body>
+
+        
+
+        <div id="root">
+
+        </div>
+
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+         <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+
+        const rootHandle= document.getElementById('root')
+
+        const countries= [
+            {name:'India', code:'IN'} ,
+            {name:'United states of America', code:'US'},
+            {name: 'Australia', code:'AU'}
+        ]
+
+        function CountriesList(props) {
+
+            function show(name) {
+                const xhr= new XMLHttpRequest()
+                xhr.open('GET', 'https://restcountries.eu/rest/v2/all?fields=name;capital')
+
+                xhr.send()
+                xhr.onClick= function() {
+                    let data= JSON.parse(xhr.responseText)
+                    console.log(data)
+
+                    data.find((test) => {
+                       if(test.name===name) {
+                           console.log(test.name)
+                           alert(test.captal)
+                       }
+                   })
+                    
+                   }
+                  
+                   }
+            
+            return (
+                
+                    <ul>{
+                        props.countries.map((ele, i) => {
+                            return <li key={i} onClick={()=>{show(ele.name)}}>{ele.name}</li>
+                        })
+                    }</ul>
+                    
+            )
+        
+
+           
+        }
+            
+    
+
+ 
+        const ele= <CountriesList countries={countries}/>
+        ReactDOM.render(ele, rootHandle)
+
+        </script>
+    </body>
+</html>

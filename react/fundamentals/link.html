@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>  </title>
+    </head>
+    <body>
+     <div id="root">
+
+     </div>
+
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src='js/babel.js'></script>
+    
+        <script type="text/babel">
+            const roothandel=document.getElementById('root')
+
+            const users= [
+                {id :1 , name: 'facebook', url:'http://www.facebook.com'},
+                {id :2 , name: 'twittet', url:'http://www.twitter.com'},
+                {id :3 , name: 'instagram', url:'http://www.instagram.com'}
+            ]
+
+
+const eles =(
+    <div>
+    <h2>total number of list - {users.length}</h2>
+    <ul>
+    {users.map((ele)=>{
+       return <li key={ele.id}> <a href={ele.url} target='_blank'> {ele.name} </a> </li>
+    })}
+    </ul>
+    </div>
+
+)
+
+ ReactDOM.render(eles,roothandel)
+        </script>
+    </body>
+</html>

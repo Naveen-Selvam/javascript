@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src='../js/babel.js'></script>
+
+    <script type="text/babel">
+        const roothandel = document.getElementById('root')
+
+        const { useState } = React
+        function Display(props) {
+            const [status, setStatus] = useState(false)
+            const { title, body } = props
+
+const eachcomp = () =>{
+  setStatus(!status)
+}
+
+            return (
+                <div>
+                   { status && <p>{body}</p>}
+                    <button onClick={eachcomp}>{status ? 'Hide' : 'Show'} - {title}</button>
+                </div>
+            )
+        }
+
+        function App(props) {
+
+            const data = [
+                { title: 'React Article', body: 'React is an open-source, front end, JavaScript library for building user interfaces or UI components. ' },
+                { title: 'Js Article', body: 'JavaScript, often abbreviated as JS, is a programming language that conforms to the ECMAScript specification.  ' },
+                { title: 'Node Article', body: 'Node.js is an open-source, cross-platform, back-end, JavaScript runtime environment that executes JavaScript code outside a web browser.  ' }
+            ]
+            return (
+                <div>
+                    <h1>Show / Hide Article</h1>
+                    {
+                        data.map((ele, i) => {
+                            return (
+                                <div key={i}>
+                                    <Display {...ele}/>
+                                </div>
+                            )
+                        })
+                    }
+
+                </div>
+            )
+        }
+
+        ReactDOM.render(<App />, roothandel)
+
+    </script>
+</body>
+
+</html>
+
+<!-- 
+
+
+    <script type="text/babel">
+        const roothandel = document.getElementById('root')
+        const { useState } = React
+        function BillPayment(props) {
+            const companies = ['Vodaphone', 'Airtel', 'Jio']
+            const [network, setNetwork] = useState('Vodaphone')
+           
+            const handelnetworkchange = (e) => {
+                setNetwork(e.target.value)
+            }
+
+            return (
+                <div>
+                    <h1>{network} - Bill payment</h1>
+                    <hr />
+                    {
+                        companies.map((ele, i) => {
+                            return (
+                                <div key={i}>
+                                    <input type='radio'  name='company' value={ele} checked={{ ele } == network} onChange={handelnetworkchange} /> {ele}
+                                    <br />
+                                </div>
+                            )
+                        })
+                    }
+                    <input type='text' placeholder={`Enter your ${network} phone number`} />
+                </div>
+            )
+        }
+
+        function App(props) {
+            return <BillPayment />
+        }
+
+        ReactDOM.render(<App />, roothandel)
+
+    </script>
+

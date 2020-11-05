@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+
+    </title>
+</head>
+
+<body onload="list(event)">
+    
+
+    <h1> </h1>
+    <ul> </ul>
+
+
+    <script>
+        const h1handle = document.querySelector('h1')
+        const ulhandel = document.querySelector('ul')
+            
+
+        function list(e) {
+            const xhr = new XMLHttpRequest()
+            xhr.open('GET', 'https://restcountries.eu/rest/v2/all?fields=name;capital;population;latlng')
+            xhr.send()
+            e.preventDefault()
+
+            xhr.onload = function data() {
+                const data = JSON.parse(xhr.responseText)
+                console.log(data);
+                h1handle.textContent = `Listing Countries - ${data.length}`
+
+                data.forEach(function (ele) {
+
+
+                    const listtag = document.createElement('li')
+                    const buttonhandel = document.createElement('button')
+                    buttonhandel.innerText = 'show'
+                  
+                  
+                  buttonhandel.addEventListener('click',function(){
+                  
+                  const display=alert(`The capital is - ${ele.capital} , population - ${ele.population} , position - (${ele.latlng})`)
+                })
+
+                    listtag.textContent = `${ele.name}`
+                    listtag.append(buttonhandel)
+                    ulhandel.appendChild(listtag)
+              
+                })
+
+
+            }
+        }
+
+    </script>
+</body>
+
+</html>

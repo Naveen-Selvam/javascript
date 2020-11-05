@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> country details </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src='js/babel.js'></script>
+
+    <script type="text/babel">
+
+        const roothandel = document.getElementById('root')
+
+        const countries = [
+            { name: 'India', code: 'IN' },
+            { name: 'United States of America', code: 'US' },
+            { name: 'Australia', code: 'AU' }
+        ]
+
+        // 1. Display all the countries as a list 
+        // 2. When the user clicks on the country name, display the capital of the country in an alert box
+        // 3. countries arrays
+
+
+        function CountriesList(props) {
+
+            function displayCaptial(name) {
+                const xhr = new XMLHttpRequest()
+                xhr.open('GET', 'https://restcountries.eu/rest/v2/all?fields=name;capital;currency;region;subregion;callingcodes;cioc;numericCode;area;population')
+                xhr.send()
+
+
+
+                xhr.onload = function () {
+
+                    let details = JSON.parse(xhr.responseText)
+
+                    const value = details.find((ele) => ele.name === name)
+                    let result = []
+                    for (const key in value) {
+                        result.push(` ${key} - ${value[key]} `)
+                    }
+                    alert(result)
+                }
+            }
+
+            return (
+                <ul>
+                    {props.list.map((ele) => <li key={ele.code} onClick={() => { displayCaptial(ele.name) }}>{ele.name}</li>)}
+                </ul>
+            )
+
+        }
+
+        ReactDOM.render(<CountriesList list={countries} />, roothandel)
+
+    </script>
+</body>
+
+</html>

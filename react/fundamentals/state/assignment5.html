@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+    <script type="text/babel">
+        const roothandel = document.getElementById('root')
+        const { useState, useEffect } = React
+
+        function UserData(props) {
+
+            const [inputId, setInputId] = useState('')
+            const [selectUser, setSelectUser] = useState([])
+            const [result, setResult] = useState('')
+         
+            const url = `https://jsonplaceholder.typicode.com/users/${inputId}`
+
+            useEffect(() => {
+                axios.get(url)
+                    .then((response) => {
+                        setSelectUser(response.data)
+                    })
+            }, [inputId])
+
+
+            const handelChange = (e) => {
+                setInputId(e.target.value)
+            }
+
+
+            const handelSearch = (e) => {
+                e.preventDefault()
+                setResult(selectUser)
+            }
+
+
+            return (
+                <div>
+                    <form onSubmit={handelSearch}>
+                        <input type='number' value={inputId} onChange={handelChange} />
+                        <input type='submit' value='search' />
+                    </form>
+
+                    {result && <h1>{result.name}-{result.email}-{result.address.city}</h1>}
+
+                </div>
+            )
+        }
+
+
+        function App(props) {
+            return (<UserData />)
+        }
+
+
+        ReactDOM.render(<App />, roothandel)
+
+    </script>
+</body>
+
+</html>

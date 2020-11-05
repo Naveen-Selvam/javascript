@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>  </title>
+    </head>
+    <body>
+     <div id="root">
+
+     </div>
+
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src='js/babel.js'></script>
+    
+        <script type="text/babel">
+            const roothandel=document.getElementById('root')
+
+            function Parent(props){
+                const name1=['naveen','nav','ns']
+            return(
+            <div>
+                 <h1>parent child </h1>            
+               {name1.map((ele)=>{
+                   return <Child name={ele} />
+                   })
+                   }
+</div>
+            )}
+
+function Child (props){
+    return <h2>{props.name}-child</h2>
+
+}
+
+ReactDOM.render(<Parent/>,roothandel)
+
+        </script>
+    </body>
+</html>

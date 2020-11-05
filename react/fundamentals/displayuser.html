@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Display users </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+    <script type="text/babel">
+        const roothandel = document.getElementById('root')
+        const users = [
+            { "id": 1, "email": "george@gmail.com", "first_name": "George", "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/calebogden/128.jpg" },
+            { "id": 2, "email": "weaver@gmail.com", "first_name": "Weaver", "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg" },
+            { "id": 3, "email": "wong@gmail.com", "first_name": "Wong", "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/olegpogodaev/128.jpg" },
+            { "id": 4, "email": "eve@gmail.com", "first_name": "Eve", "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/marcoramires/128.jpg" }
+        ]
+
+        const ele = (
+            <div>
+                <h2> Lising users - {users.length} </h2>
+                <table border='1'>
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th> Avatar </th>
+                            <th> First Name </th>
+                            <th> Email </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                      {  users.map((ele)=> {
+                         return   <tr key={ele.id}>
+                                <td> {ele.id} </td>
+                                <td> <img src={ele.avatar} /> </td>
+                                <td> {ele.first_name} </td>
+                                <td> {ele.email} </td>
+                            </tr>
+                        })}
+
+                    </tbody>
+                </table>
+            </div>
+        )
+
+        ReactDOM.render(ele, roothandel)
+
+    </script>
+</body>
+
+</html>

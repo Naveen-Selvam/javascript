@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Status Pending & Completed </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+
+    <script type="text/babel">
+        const roothandel = document.getElementById('root')
+        const {useState} = React
+        function SelectAll(props) {
+            const tasks = [
+                { id: 1, title: 'get the website live', completed: true },
+                { id: 2, title: 'work on user validation', completed: false },
+                { id: 3, title: 'Automate the deployment process', completed: false }
+            ]
+            const [check , setCheck] = useState(tasks.map((ele)=>({...ele,...{completed : false}})))
+            const[ mark , setMark] = useState (false)
+            const [status , setStatus] = useState(false)
+         
+            
+            const handelChange = ()=>{
+                setMark(!mark)
+                setStatus(!status)
+            }  
+
+            return (
+                <div>
+                <table border='1px'>
+                <thead>
+                <tr>
+                <th><input type='checkbox' onChange={handelChange}/></th>
+                <th>Title</th>
+                <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                {
+                    check.map((ele)=>{
+                        return (
+                            <tr key={ele.id}>
+                            <td><input type='checkbox' disabled={true} checked={mark}/></td>
+                            <td>{ele.title}</td>
+                            {status ? <td>completed</td> : <td>Pending</td> }
+                            </tr>
+                        )
+                    })
+                }
+                </tbody>
+                </table>
+                </div>
+            )
+
+        }
+
+        function App(props) {
+            return (
+                <div>
+                <h1>Mark All as completed</h1>
+                <SelectAll />
+                </div>
+            )
+        }
+
+        ReactDOM.render(<App />, roothandel)
+
+    </script>
+</body>
+
+</html>

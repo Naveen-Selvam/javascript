@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src='../js/babel.js'></script>
+
+    <script type="text/babel">
+        const roothandel = document.getElementById('root')
+
+        const { useState } = React
+
+        function SelectLaptop(props) {
+            const [username, setUsername] = useState('')
+            const [laptop, setLaptop] = useState('')
+            const [issubmit , setissubmit] = useState(false)
+
+            const handelOnchange = (e) => {
+                const userinput = e.target.value
+                setUsername(userinput)
+            }
+            const handellaptop = (e) => {
+                const laptopinput = e.target.value
+                setLaptop(laptopinput)
+            }
+            const handelsubmit = (e) => {
+                e.preventDefault()
+                setissubmit(!issubmit)
+            }
+            return (
+                <div>
+                    {issubmit && <h1>{laptop}</h1>}
+                    
+                    <form onSubmit={handelsubmit}>
+                        <label>username</label><br />
+                        <input type='text' value={username} onChange={handelOnchange} /> <br />
+
+                        <select value={laptop} onChange={handellaptop}>
+                            <option value=''>Select</option>
+                            <option value='Lenevo'>Lenevo</option>
+                            <option value='Dell'>Dell</option>
+                            <option value='Hp'>Hp</option>
+                            <option value='Apple'>Apple</option>
+                            <option value='Acer'>Acer</option>
+                        </select><br />
+                        <input type='submit' />
+                    </form>
+                </div>
+            )
+        }
+
+        ReactDOM.render(<SelectLaptop />, roothandel)
+
+    </script>
+</body>
+
+</html>

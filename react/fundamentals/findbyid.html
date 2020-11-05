@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Find by id </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+    <script type="text/babel">
+
+        const roothandel = document.getElementById('root')
+
+        const tasks = [
+            { id: 1, title: 'Task 1', isCompleted: true },
+            { id: 2, title: 'Task 2', isCompleted: true },
+            { id: 3, title: 'Task 3', isCompleted: false }
+        ]
+
+        function FindElement(props) {
+
+            function checkId() {
+                const userid = Number(prompt('Enter the id'))
+
+
+                const result = props.data.find((ele) => ele.id === userid)
+                if (result) {
+                    alert(`${result.title} - ${result.isCompleted}`)
+                }
+                else {
+                    alert(`this task with id ${userid} not found`)
+                }
+            }
+            return <button onClick={checkId}> Find Record by Id </button>
+        }
+
+        const ele = <FindElement data={tasks} />
+        ReactDOM.render(ele, roothandel)
+
+    </script>
+</body>
+
+</html>

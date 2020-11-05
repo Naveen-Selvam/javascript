@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> arithmetic  </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src='js/babel.js'></script>
+
+    <script type="text/babel">
+       
+       const dist ={
+           from:'blr',
+           to:'slm',
+           dis:'300km',
+           time:'3hr'
+       }
+
+       const roothandel=document.getElementById('root')
+
+       const det = dist =>{
+       return  `${dist.from} to ${dist.to} around ${dist.dis} time taken is ${dist.time}`
+       }
+       const e=[1,2,3,4,4,5,67]
+
+       const ele=<p>{dist}</p>
+       
+       ReactDOM.render(ele,roothandel)
+
+       
+    </script>
+</body>
+
+</html>

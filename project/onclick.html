@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+
+    </title>
+</head>
+
+<body>
+    <form>
+        <button onclick="list(event)">Fetch Data</button>
+    </form>
+  
+    <h1> </h1>
+    <ul> </ul>
+    
+
+
+    <script>
+        const h1handle = document.querySelector('h1')
+        const ulhandel = document.querySelector('ul')
+     
+        function list(e) {
+            const xhr = new XMLHttpRequest()
+            xhr.open('GET', 'https://restcountries.eu/rest/v2/all?fields=name;capital')
+            xhr.send()
+            e.preventDefault()
+
+            xhr.onload = function data() {
+                const data = JSON.parse(xhr.responseText)
+                console.log(data);
+                h1handle.textContent = `Listing Countries - ${data.length}`
+
+                data.forEach(function (ele) {
+                    const listtag = document.createElement('li')
+                    listtag.textContent = `${ele.name}`
+                    ulhandel.appendChild(listtag)
+         
+      
+
+            })
+            
+
+            }
+        }
+
+    </script>
+</body>
+
+</html>

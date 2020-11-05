@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Assignment </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src='../js/babel.js'></script>
+
+    <script type="text/babel">
+        const roothandel = document.getElementById('root')
+
+        const { useState } = React
+        function Tabel(props) {
+            const [users, setUser] = useState(props.user)
+            console.log(users);
+
+            const removedisplay = (users) => {
+
+                const newname = prompt("Enter the name")
+
+                const newdata = users.filter((ele) => {
+                    if (ele.name === newname) {
+                        return ele.name != newname
+                    }
+                 
+                })
+                setUser(newdata)
+            }
+
+            return (
+                <div>
+                    <table border='1px'>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {
+                                users.map((ele) => {
+                                    return (
+
+                                        <tr key={ele.id}>
+                                            <td>{ele.id}</td>
+                                            <td>{ele.name}</td>
+                                            <td>{'***' + ele.email.slice(5)} </td>
+                                            <td><button onClick={() => removedisplay(users)}>Remove</button></td>
+                                        </tr>
+
+                                    )
+                                })
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            )
+        }
+
+        function App(props) {
+
+            const user = [
+                { id: 1, name: 'user1', email: 'user1@gmail.com' },
+                { id: 2, name: 'user2', email: 'user2@yahoo.com' },
+                { id: 3, name: 'user3', email: 'user3@redifmail.com' },
+                { id: 4, name: 'user4', email: 'user4@outlook.com' }
+            ]
+
+            return (
+                <div>
+                    <h1>Listing User - {user.length} </h1>
+                    <Tabel user={user} />
+                </div>
+            )
+        }
+
+        ReactDOM.render(<App />, roothandel)
+
+
+
+    </script>
+</body>
+
+</html>

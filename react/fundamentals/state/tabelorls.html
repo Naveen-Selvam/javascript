@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Display in table or list </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+
+    <script type="text/babel">
+        const { useState } = React
+        const roothandel = document.getElementById('root')
+
+        function EmployeeTable(props) {
+            const { employees } = props
+
+            return (
+                <div>
+                    <h1>List of Employees - {employees.length}</h1>
+                    <table border='1px'>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {
+                                employees.map((ele) => {
+                                    return (
+                                        <tr key={ele.id}>
+                                            <td>{ele.id}</td>
+                                            <td>{ele.name}</td>
+                                            <td>{ele.email}</td>
+                                        </tr>
+                                    )
+                                })
+
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            )
+        }
+
+        function EmployeeList(props) {
+            const { employees } = props
+            return (
+                <div>
+                    <h1>List of Employees - {employees.length}</h1>
+                    <ul>
+                        {
+                            employees.map((ele) => {
+                                return (<li key={ele.id}> {ele.name} - {ele.email} </li>)
+                            })
+                        }
+                    </ul>
+                </div>
+            )
+        }
+
+        function EmployeeContainer(props) {
+            const { employees } = props
+            const [type, setType] = useState('List')
+
+            const handelChange = (e) => {
+                const result = e.target.value
+                setType(result)
+
+
+
+            }
+            return (
+                <div>
+                    <input type='radio' name='type' value='List' checked={type === 'List'} onChange={handelChange} />List
+                    <input type='radio' name='type' value='Table' checked={type === 'Table'} onChange={handelChange} />Table
+                    {type === 'List' ? <EmployeeList employees={employees} /> : <EmployeeTable employees={employees} />}
+                </div>
+            )
+        }
+
+        function App(props) {
+
+            const employees = [
+                { id: 1, name: 'emp1', email: 'emp1@gmail.com' },
+                { id: 2, name: 'emp2', email: 'emp2@gmail.com' },
+                { id: 3, name: 'emp3', email: 'emp3@gmail.com' },
+                { id: 4, name: 'emp4', email: 'emp4@gmail.com' }
+            ]
+
+            return (
+                <div>
+                    <EmployeeContainer employees={employees} />
+                </div>
+            )
+        }
+
+        ReactDOM.render(<App />, roothandel)
+
+    </script>
+</body>
+
+</html>

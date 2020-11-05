@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>  </title>
+    </head>
+    <body>
+     <div id="root">
+
+     </div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src='../js/babel.js'></script>
+    <script src=' https://unpkg.com/axios/dist/axios.min.js'></script>
+    
+        <script type="text/babel">
+            const roothandel=document.getElementById('root')
+             const url= 'https://jsonplaceholder.typicode.com/users'
+            const {useState,useEffect} = React
+            function UsersData (props){
+                const [userData , setUserData] = useState([])
+
+                useEffect(()=>{
+                    axios.get(url)
+                    .then((response)=>{
+                        setUserData(response.data)
+                    })
+                },[])
+
+                const handeleChange = (e)=>{
+                  setUserData(e.target.value)
+                }
+           
+
+                return (
+                    <div>
+                    <form>
+                    <label>Users</label>
+                    <select>
+                    <option>Select User</option>
+                    {
+                        userData.map((user)=>{
+                            return (<option key={user.id} onChange={handeleChange}>{user.name}</option>)
+                        })
+                    }
+                    </select>
+                    </form>
+                    </div>
+                )
+            }
+
+            function App(props){
+                return (<UsersData />)
+            }
+
+            ReactDOM.render(<App />,roothandel)
+
+        </script>
+    </body>
+</html>

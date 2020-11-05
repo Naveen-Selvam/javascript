@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script type="text/babel">
+        const roothandel = document.getElementById('root')
+        const url = 'https://jsonplaceholder.typicode.com/users'
+
+        const { useState, useEffect } = React
+        function UsersSelect(props) {
+            const [users, setUsers] = useState([])
+            const [singleUserData , setSingleUserData] = useState('')
+
+            useEffect(() => {
+                axios.get(url)
+                    .then((response) => {
+                        setUsers(response.data)
+                    })
+
+
+            }, [])
+
+            const handelChange = (e)=>{
+                const dropdown = e.target.value
+              const result = users.find((user)=>{
+                    return user.id == dropdown
+                })
+                setSingleUserData(result)
+      
+             
+            }
+
+            return (
+                <div>
+                    <label>Users</label>
+                    <select onChange={handelChange}>
+                        <option >Select User</option>
+                        {
+                            users.map((user,i)=>{
+                                return (<option key={i} value={user.id} >{user.name}</option>)
+                            })
+
+                        }
+                    </select>
+                    {singleUserData ? <h3>{singleUserData.name} - {singleUserData.email} - {singleUserData.address.city}</h3> : <h2>Select Any User</h2>}
+                </div>
+            )
+
+        }
+
+        function App(props) {
+            return (<UsersSelect />)
+        }
+
+        ReactDOM.render(<App />, roothandel)
+
+    </script>
+</body>
+
+</html>

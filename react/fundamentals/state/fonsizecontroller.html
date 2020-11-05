@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src='../js/babel.js'></script>
+
+    <script type="text/babel">
+        const roothandel = document.getElementById('root')
+
+        const { useState } = React
+
+        function FontSize(props) {
+            const [size, setSize] = useState(50)
+            
+        const zoomout = ()=>{
+           setSize (size - 5)
+
+           if(size === 20){
+               alert('Thambi podhum ')
+               setSize(20)
+           }
+        }
+        const zoomin = ()=>{
+            setSize (size + 5)
+        }
+         
+
+            return (
+                <div>
+                    <h1>Font Size Controller</h1>
+                   
+                    <button onClick={zoomout}> - </button>
+                   
+                    <h1 style={{fontSize :size + 'px' , display : 'inline'}}> Dct Academy </h1>
+                    
+                    <button onClick={zoomin}> + </button>
+                </div>
+            )
+        }
+
+        ReactDOM.render(<FontSize />, roothandel)
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Welcom to 1st project</title>
+</head>
+
+<body>
+    <h1>Task Box</h1>
+    <form onsubmit="submithandel(event)">
+        <input type="text" name='textfield' placeholder="Enter the text" />
+    </form>
+
+    <h2></h2>
+    <ul></ul>
+    <script>
+        const tasks = JSON.parse(localStorage.getItem('task')) || []
+        const h2handel = document.querySelector('h2')
+        const ulhandel = document.querySelector('ul')
+
+        const submithandel = (e) => {
+            e.preventDefault()
+
+            const task = {
+                id: Number(new Date()),
+                title: e.target.textfield.value
+            }
+
+            tasks.push(task)
+            localStorage.setItem('tasks', JSON.stringify(tasks))
+            console.log(tasks);
+
+            h2handel.textContent = `My task - ${tasks.length}`
+
+            e.target.reset()
+            ligenerator(task)
+        }
+
+        // create litag
+        const ligenerator = (task) => {
+            const litag = document.createElement('li')
+            litag.textContent = task.title
+            ulhandel.appendChild(litag)
+
+            removetag(litag, task)
+        }
+
+        //remove litag
+        const removetag = (litag, task) => {
+            litag.addEventListener('click', function () {
+                ulhandel.removeChild(litag)
+
+
+                const index = tasks.findIndex((ele) => {
+                    return ele.id == task.id
+                })
+                console.log(index);
+
+                tasks.splice(index, 1)
+                localStorage.setItem('tasks', JSON.stringify(tasks))
+
+                h2handel.textContent = `My task - ${tasks.length}`
+            })
+
+        }
+
+        tasks.forEach((task) => {
+            ligenerator(tasks)
+        })
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

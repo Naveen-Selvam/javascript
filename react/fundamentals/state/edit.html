@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src='../js/babel.js'></script>
+
+    <script type="text/babel">
+        const roothandel = document.getElementById('root')
+
+        const { useState } = React
+        const userData = [
+            { id: 1, name: 'user1' },
+            { id: 2, name: 'user2' },
+            { id: 3, name: 'user3' }
+        ]
+
+        function UserDetails(props) {
+
+            const [user, setUser] = useState(userData)
+
+            const removeuser = (id) => {
+                const confirmRemove = confirm('R u sure ?')
+                if (confirmRemove) {
+                    const result = user.filter((ele) => {
+                        return ele.id != id
+
+                    })
+
+                    setUser(result)
+                }
+
+            }
+
+            const editElement= (id)=>{
+                 const change=prompt('Enter the user name')
+                 const changeResult=user.map((ele)=>{
+                     if(ele.id === id){
+                         return {...user , ...{name : change}}
+                     }
+                     else{
+                         return {...user}
+                     }
+                 })
+             
+                 setUser(changeResult)
+            }
+
+            return (
+                <div>
+                    <h1>Total number of User - {user.length}</h1>
+                   
+                    <ul>
+                        {
+                            user.map((ele) => {
+                                return <li key={ele.id}> {ele.name}
+                                    <button onClick={()=>editElement(ele.id)}>Edit</button>
+                                 <button onClick={() => {
+                                    removeuser(ele.id)
+                                }}>Remove</button> </li>
+                            })
+                        }
+                    </ul>
+
+                </div>
+            )
+        }
+
+        ReactDOM.render(<UserDetails />, roothandel)
+
+    </script>
+</body>
+
+</html>

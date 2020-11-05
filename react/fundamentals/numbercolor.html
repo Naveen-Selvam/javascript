@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> NumberColor </title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+    <script type="text/babel">
+        const roothandel = document.getElementById('root')
+
+        function NumberColor(props) {
+            let color
+
+            if (props.number % 2 === 0) {
+                color = { color: 'red' }
+                return (
+                    <div>
+                        <h1> Even Number </h1>
+                        <h1 style={color} >  {props.number} </h1>
+                    </div>)
+            }
+            else {
+                color = { color: 'yellow' }
+
+                return(
+                <div>
+                    <h1> Odd Number </h1>
+                    <h1 style={color}>{props.number}</h1>
+                </div>
+                )
+            }
+        }
+
+        function App(props) {
+
+            return (
+                <div>
+                    <NumberColor number={10} />
+                    <NumberColor number={11} />
+                </div>
+            )
+        }
+
+        ReactDOM.render(<App />, roothandel)
+
+    </script>
+</body>
+
+</html>

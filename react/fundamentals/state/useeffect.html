@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>  </title>
+    </head>
+    <body>
+     <div id="root">
+
+     </div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src='../js/babel.js'></script>
+    
+        <script type="text/babel">
+            const roothandel=document.getElementById('root')
+            const {useEffect,useState} = React
+             
+            function App(props){
+             const [count,setCount] = useState(1)
+                useEffect(()=>{
+                    alert('hi machi')
+                })
+
+                const handleClick =()=>{
+                    setCount(count+1)
+                }
+                return (
+                    <div>
+                    <h1>vanakam - {count}</h1>
+                    <button onClick={handleClick}>+</button>
+                    </div> 
+                )
+
+            }
+
+            ReactDOM.render(<App/>,roothandel)
+
+        </script>
+    </body>
+</html>
