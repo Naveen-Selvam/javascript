@@ -30,7 +30,7 @@
                                 return (
 
                                     <li key={ele.id}>
-                                        <input type='checkbox' checked={ele.completed} onChange={() => handelChange(ele.id)} />
+                                        <input type='checkbox'  checked={ele.completed} onChange={() => handelChange(ele.id)} />
 
                                         {ele.completed ? <strike ><span>{ele.title}</span></strike> : ele.title}
                                     </li>

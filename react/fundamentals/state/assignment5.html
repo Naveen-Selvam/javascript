@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title> </title>
+    <title> Search By Id </title>
 </head>
 
 <body>
@@ -16,17 +16,16 @@
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-
     <script type="text/babel">
         const roothandel = document.getElementById('root')
         const { useState, useEffect } = React
 
         function UserData(props) {
 
-            const [inputId, setInputId] = useState('')
+            const [inputId, setInputId] = useState(' ')
             const [selectUser, setSelectUser] = useState([])
-            const [result, setResult] = useState('')
-         
+            const [result, setResult] = useState({})
+
             const url = `https://jsonplaceholder.typicode.com/users/${inputId}`
 
             useEffect(() => {
@@ -34,28 +33,31 @@
                     .then((response) => {
                         setSelectUser(response.data)
                     })
-            }, [inputId])
+                    .catch((err)=>{
+                        setSelectUser({})
+                    })
 
+
+            }, [inputId])
 
             const handelChange = (e) => {
                 setInputId(e.target.value)
             }
-
 
             const handelSearch = (e) => {
                 e.preventDefault()
                 setResult(selectUser)
             }
 
-
             return (
                 <div>
                     <form onSubmit={handelSearch}>
                         <input type='number' value={inputId} onChange={handelChange} />
                         <input type='submit' value='search' />
-                    </form>
+                    </form >
 
-                    {result && <h1>{result.name}-{result.email}-{result.address.city}</h1>}
+                    {Object.keys(result).length > 0  ? <h1>{result.name}-{result.email}-{result.address.city}</h1> : 
+                    (<p style={{ color: "red" }}>record not found</p>)}
 
                 </div>
             )

@@ -1,60 +1,122 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>  </title>
-    </head>
-    <body>
-     <div id="root">
 
-     </div>
+<head>
+    <title> User todo </title>
+</head>
 
-    <script src="../js/react.development.js"></script>
-    <script src="../js/react-dom.development.js"></script>
-    <script src='../js/babel.js'></script>
+<body>
+    <div id="root">
+
+    </div>
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
     <script src=' https://unpkg.com/axios/dist/axios.min.js'></script>
-    
-        <script type="text/babel">
-            const roothandel=document.getElementById('root')
-             const url= 'https://jsonplaceholder.typicode.com/users'
-            const {useState,useEffect} = React
-            function UsersData (props){
-                const [userData , setUserData] = useState([])
 
-                useEffect(()=>{
-                    axios.get(url)
-                    .then((response)=>{
+    <script type="text/babel">
+        const roothandel = document.getElementById('root')
+
+        const { useState, useEffect } = React
+
+
+        function ListingTask(props) {
+            const { userDetails } = props
+            return (
+                <div>
+                    {userDetails.length > 1 ? <h1>Listing Task</h1> : ' '}
+
+                    {
+                        userDetails.length > 1 ?
+                    <ul>
+                        {
+                            userDetails.map((ele) => {
+                                return (
+                                    <div key={ele.id}>
+
+
+                                        {ele.completed ? <strike> <li> {ele.title} </li> </strike> : <li> {ele.title} </li>}
+
+
+                                    </div>
+                                )
+                            })
+                        }
+                    </ul> : ''
+                }
+                </div>
+            )
+        }
+
+
+        function UsersData(props) {
+            const [userData, setUserData] = useState([])
+            const [userInputId, setUserIndputId] = useState('')
+            const [userDetails, setUserDetails] = useState([])
+
+            const url = 'https://jsonplaceholder.typicode.com/users'
+            const url1 = `https://jsonplaceholder.typicode.com/todos?userId=${userInputId}`
+
+
+
+            useEffect(() => {
+                axios.get(url)
+                    .then((response) => {
                         setUserData(response.data)
                     })
-                },[])
+            }, [])
 
-                const handeleChange = (e)=>{
-                  setUserData(e.target.value)
+            useEffect(() => {
+                axios.get(url1)
+                    .then((response) => {
+                        setUserDetails(response.data)
+                    })
+            }, [userInputId])
+         
+
+
+            const handeleChange = (e) => {
+                if(e.target.value == 0){
+                    setUserIndputId('')
                 }
-           
+                else{
+                const result = userData.find((user) => {
+                    return user.id == e.target.value
+                })
+                setUserIndputId(result.id)
+            }
+            }
+            const handelSelect = (e)=>{
+                setUserDetails('')
+            }
 
-                return (
-                    <div>
+            return (
+                <div>
                     <form>
-                    <label>Users</label>
-                    <select>
-                    <option>Select User</option>
-                    {
-                        userData.map((user)=>{
-                            return (<option key={user.id} onChange={handeleChange}>{user.name}</option>)
-                        })
-                    }
-                    </select>
+                        <label>Users</label>
+                        <select onChange={handeleChange}>
+                            <option value ='' >Select User</option>
+                            {
+                                userData.map((user) => {
+                                    return (<option key={user.id} value={user.id} >{user.name}</option>)
+                                })
+                            }
+                        </select>
                     </form>
-                    </div>
-                )
-            }
+                    <ListingTask userDetails={userDetails} />
+                </div>
+            )
+        }
 
-            function App(props){
-                return (<UsersData />)
-            }
+        function App(props) {
+            return (<UsersData />)
+        }
 
-            ReactDOM.render(<App />,roothandel)
+        ReactDOM.render(<App />, roothandel)
 
-        </script>
-    </body>
+    </script>
+</body>
+
 </html>
