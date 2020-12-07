@@ -17,10 +17,7 @@ const PostDetails = (props) => {
                 setData(response.data);
             })
 
-        axios.get(`https://jsonplaceholder.typicode.com/users/${Math.ceil(0.1*id)}`)
-            .then((response) => {
-                setName(response.data.name);
-            })
+
 
         axios.get(`https://jsonplaceholder.typicode.com/comments?postId=${id}`)
             .then((response) => {
@@ -31,6 +28,15 @@ const PostDetails = (props) => {
                 alert(err.message)
             })
     }, [])
+
+    useEffect(()=>{
+        if(data){
+            axios.get(`https://jsonplaceholder.typicode.com/users/${data.userId}`)
+            .then((response) => {
+                setName(response.data.name);
+            }) 
+        }
+    },[data])
 
 
 
@@ -47,7 +53,7 @@ const PostDetails = (props) => {
                 })
             }
             <hr />
-            <Link to={`/users/${Math.ceil(0.1*id)}`}>More post of author : {name}</Link>
+            <Link to={`/users/${data.userId}`}>More post of author : {name}</Link>
         </div>
     )
 }
